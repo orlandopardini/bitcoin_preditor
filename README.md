@@ -14,8 +14,8 @@ O projeto utiliza **SQLite** como armazenamento padrão (`GIT/DB/cripto.sqlite`)
 
 ```
           ┌───────────────────┐           ┌───────────────────────────┐
- Price →  │  Coletor (1 min) │  writes   │   SQLite (cripto.sqlite)  │
-(binance) │ btc_tempo_real   ├──────────▶│  btc_realtime (+ índices) │
+ Price →  │  Coletor (1 min)  │  writes   │   SQLite (cripto.sqlite)  │
+(binance) │ btc_tempo_real    ├─────────▶│  btc_realtime (+ índices) │
           └───────────────────┘           └──────────┬────────────────┘
                                                      │
                           ┌───────────────────────────▼─────────────────────────┐
