@@ -1,0 +1,55 @@
+version: "3.8"
+services:
+  collector:
+    build: .
+    container_name: btc_collector
+    volumes:
+      - ./GIT/DB:/app/GIT/DB
+      - ./logs:/app/logs
+    environment:
+      - CRYPTO_DB=/app/GIT/DB/cripto.sqlite
+    command: ["python","btc_tempo_real_v4.py"]
+
+  predictor_1m:
+    build: .
+    container_name: btc_predictor_1m
+    volumes:
+      - ./GIT/DB:/app/GIT/DB
+      - ./logs:/app/logs
+    environment:
+      - CRYPTO_DB=/app/GIT/DB/cripto.sqlite
+    command: ["python","btc_predictor_v4.py"]
+
+  predictor_30m:
+    build: .
+    container_name: btc_predictor_30m
+    volumes:
+      - ./GIT/DB:/app/GIT/DB
+      - ./logs:/app/logs
+    environment:
+      - CRYPTO_DB=/app/GIT/DB/cripto.sqlite
+    command: ["python","btc_predictor_30min_v4.py"]
+
+  retrain:
+    build: .
+    container_name: btc_retrain
+    volumes:
+      - ./GIT/DB:/app/GIT/DB
+      - ./logs:/app/logs
+    environment:
+      - CRYPTO_DB=/app/GIT/DB/cripto.sqlite
+    command: ["python","btc_retrain_v4.py"]
+
+  streamlit:
+    build: .
+    container_name: btc_streamlit
+    volumes:
+      - ./GIT/DB:/app/GIT/DB
+      - ./logs:/app/logs
+    environment:
+      - CRYPTO_DB=/app/GIT/DB/cripto.sqlite
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_HEADLESS=true
+    ports:
+      - "8501:8501"
+    command: ["streamlit","run","streamlit_app_v4.py","--server.port=8501","--server.headless=true"]
