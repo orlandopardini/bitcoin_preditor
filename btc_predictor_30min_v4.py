@@ -30,6 +30,11 @@ if not DB_PATH:
     _DBDIR.mkdir(parents=True, exist_ok=True)
     DB_PATH = str(_DBDIR / "cripto.sqlite")
 print(f"[CONFIG] DB_PATH = {DB_PATH}")
+
+# Diretório base para salvar artefatos do preditor
+BASE_PATH = os.path.join(os.path.dirname(DB_PATH), "models")
+os.makedirs(BASE_PATH, exist_ok=True)
+
 # ===========================
 
 # ----------------- CONFIG -----------------

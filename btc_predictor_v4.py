@@ -35,6 +35,10 @@ if not DB_PATH:
 print(f"[CONFIG] DB_PATH = {DB_PATH}")
 # ===========================
 
+# Diretório base para salvar artefatos do preditor
+BASE_PATH = os.path.join(os.path.dirname(DB_PATH), "models")
+os.makedirs(BASE_PATH, exist_ok=True)
+
 SYMBOL = 'BTC/USDT'
 ATIVO = SYMBOL.split('/')[0].lower()
 TABELA_FONTE = f"{ATIVO}_realtime"
@@ -42,9 +46,9 @@ TABELA_PREV  = f"{ATIVO}_predictions"
 TABELA_META  = f"{ATIVO}_model_meta"
 # BASE_PATH removed (using DB_PATH)
 # DB_PATH removed (using portable DB_PATH)
-ARQ_STATE = os.path.join(os.path.dirname(DB_PATH), f\'{ATIVO}_v4_state.json\')
-ARQ_MODELS = os.path.join(os.path.dirname(DB_PATH), f\'{ATIVO}_v4_models.joblib\')
-ARQ_SCALERS = os.path.join(os.path.dirname(DB_PATH), f\'{ATIVO}_v4_scalers.joblib\')
+ARQ_STATE   = os.path.join(os.path.dirname(DB_PATH), f"{ATIVO}_v4_state.json")
+ARQ_MODELS  = os.path.join(os.path.dirname(DB_PATH), f"{ATIVO}_v4_models.joblib")
+ARQ_SCALERS = os.path.join(os.path.dirname(DB_PATH), f"{ATIVO}_v4_scalers.joblib")
 
 MIN_HISTORY = 1200   # um pouco mais para indicadores
 MAX_WINDOW  = 8000
